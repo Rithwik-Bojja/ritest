@@ -1,0 +1,23 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  imageTag: '$(Build.BuildId)'  # You can also hardcode like '20250422' or use branch names etc.
+
+steps:
+
+- task: Checkout@1
+  displayName: 'Checkout code'
+
+- script: |
+    echo "Replacing __IMAGETAG__ with $(imageTag)"
+    sed -i "s|__IMAGETAG__|$(imageTag)|g" deployment.yaml
+  displayName: 'Replace image tag in deployment.yaml'
+
+- script: |
+    echo "Updated deployment.yaml:"
+    cat deployment.yaml
+  displayName: 'Show updated deployment.yaml'
