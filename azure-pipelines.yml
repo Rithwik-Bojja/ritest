@@ -5,7 +5,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  imageTag: '008'  # You can also hardcode like '20250422' or use branch names etc.
+  imageTag: '008' 
 
 steps:
 
