@@ -18,6 +18,5 @@ stages:
         script: |
           echo "Replacing image tag in deployment.yaml..."
           sed "s|__IMAGETAG__|${{ variables.imageTag }}|g" deployment.yaml > updated-deployment.yaml
-
-- script: cat deployment.yaml
-  displayName: 'Show updated file'
+          - script: cat deployment.yaml
+          displayName: 'Show updated file'
