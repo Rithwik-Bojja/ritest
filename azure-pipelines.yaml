@@ -4,19 +4,16 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-parameters:
-  - name: testtagname
-    displayName: 'Enter image tag'
-    type: string
-    default: '20250423'
+variables:
+  testtagname: '20250423'  # You can change this to any tag you like
 
 steps:
 - task: Checkout@1
 
 - script: |
-    echo "Replacing tag with ${{ parameters.testtagname }}"
-    sed -i "s|__IMAGETAG__|${{ parameters.testtagname }}|g" deployment.yaml
-  displayName: 'Replace tag in deployment.yaml'
+    echo "Replacing tag with $(testtagname)"
+    sed -i "s|__IMAGETAG__|$(testtagname)|g" deployment.yaml
+  displayName: 'Replace tag in YAML'
 
 - script: cat deployment.yaml
-  displayName: 'Show updated deployment.yaml'
+  displayName: 'Show updated file'
