@@ -18,5 +18,5 @@ steps:
     sed -i "s|__IMAGETAG__|${{ parameters.testtagname }}|g" deployment.yaml
   displayName: 'Replace tag in YAML'
 
-- script: cat deployment.yaml
-  displayName: 'Show updated file'
+# - script: cat deployment.yaml
+#   displayName: 'Show updated file'
