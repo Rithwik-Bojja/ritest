@@ -7,7 +7,7 @@ variables:
 stages:
 - stage: Deploy
   jobs:
-  - job: RithReplace&&&Deployment
+  - job: RithReplaceandDeployment
     steps:
     - checkout: self
 
