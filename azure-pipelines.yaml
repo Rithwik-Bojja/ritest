@@ -1,19 +1,23 @@
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
-
 variables:
-  testtagname: '20250423'  # You can change this to any tag you like
+  imageTag: '77'
 
-steps:
-- task: Checkout@1
+stages:
+- stage: Deploy
+  jobs:
+  - job: ReplaceAndDeploy
+    steps:
+    - checkout: self
 
-- script: |
-    echo "Replacing tag with $(testtagname)"
-    sed -i "s|__IMAGETAG__|$(testtagname)|g" deployment.yaml
-  displayName: 'Replace tag in YAML'
+    - task: Bash@3
+      name: ReplaceTag
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo "Replacing image tag in deployment.yaml..."
+          sed "s|__IMAGETAG__|${{ variables.imageTag }}|g" deployment.yaml > updated-deployment.yaml
 
 - script: cat deployment.yaml
   displayName: 'Show updated file'
