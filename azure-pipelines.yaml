@@ -8,7 +8,7 @@ parameters:
   - name: testtagname
     displayName: 'Enter image tag'
     type: string
-    default: '20250422.5'
+    default: '20250423'
 
 steps:
 - task: Checkout@1
