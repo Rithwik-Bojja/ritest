@@ -2,22 +2,22 @@ trigger:
 - main
 
 variables:
-  imageTag: '77'
+  testtag: '08'
 
 stages:
 - stage: Deploy
   jobs:
-  - job: ReplaceAndDeploy
+  - job: RithReplace&&&Deployment
     steps:
     - checkout: self
 
     - task: Bash@3
-      name: ReplaceTag
+      name: Replacing
       inputs:
         targetType: 'inline'
         script: |
-          echo "Replacing image tag in deployment.yaml..."
-          sed "s|__IMAGETAG__|${{ variables.imageTag }}|g" deployment.yaml > updated-deployment.yaml
+          echo "Hello Rithwik, Replacing image tag in deployment.yaml... check it."
+          sed "s|__IMAGETAG__|${{ variables.testtag }}|g" deployment.yaml > updated-deployment.yaml
 
     - script: cat updated-deployment.yaml
-      displayName: 'Show updated file'
+      displayName: 'Rithwik, Showing the updated file'
