@@ -1,8 +1,11 @@
 trigger:
 - main
 
-variables:
-  testtag: '08'
+parameters:
+- name: testtag
+  displayName: 'Test Tag'
+  type: string
+  default: 'latest'
 
 stages:
 - stage: Deploy
@@ -12,12 +15,12 @@ stages:
     - checkout: self
 
     - task: Bash@3
-      name: Replacing
+      name: ReplaceTag
       inputs:
         targetType: 'inline'
         script: |
           echo "Hello Rithwik, Replacing image tag in deployment.yaml... check it."
-          sed "s|__IMAGETAG__|${{ variables.testtag }}|g" deployment.yaml > updated-deployment.yaml
+          sed "s|__IMAGETAG__|${{ parameters.testtag }}|g" deployment.yaml > updated-deployment.yaml
 
     - script: cat updated-deployment.yaml
       displayName: 'Rithwik, Showing the updated file'
